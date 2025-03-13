@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <title>NEWS FEED</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__container">
+        <a href="index.html" class="header__logo logo">ZIMRAR</a>
+        <div class="header__navigation">
+          <div class="header__menu menu">
+            <nav class="menu__body">
+              <nav class="menu__body">
+                <ul class="menu__list">
+                  <li class="menu__item"><a href="index.html" class="menu__link">Home</a></li>
+                  <li class="menu__item"><a href="about.html" class="menu__link">About</a></li>
+                  <li class="menu__item"><a href="newsfeed.html" class="menu__link">News Feed</a></li>
+                  <li class="menu__item"><a href="contact.html" class="menu__link">Contact</a></li>
+                </ul>
+                <a href="#" class="actions-header__button">CTA Button</a>
+              </nav>
+          </div>
+          <div class="header__actions actions-header">
+            <button type="button" class="menu__icon icon-menu"><span></span></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="page">
+      <section class="page__main main main_newsfeed main_pages">
+        <div class="main__video-bg">
+          <video autoplay muted playsinline>
+            <source src="videos/newspaper.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="main__container main__container_pages">
+          <h1 class="main__title">News Feed</h1>
+          <div class="main__text main__text_pages">
+            Aggregate and organize your favorite RSS feeds in one place
+          </div>
+        </div>
+      </section>
+      
+      <section class="page__newsfeed newsfeed">
+        <div class="newsfeed__container">
+          <!-- RSS Input Section -->
+          <div class="newsfeed__input">
+            <input type="url" placeholder="Paste RSS feed URL here..." class="newsfeed__url-input">
+            <button class="newsfeed__add-button button">Add Feed</button>
+            <button class="newsfeed__edit-button button">Edit Feeds</button>
+          </div>
+
+          <!-- Feed Filter Bar -->
+          <div class="newsfeed__filters">
+            <div class="filters__scroll">
+              <button class="filter__item filter__item--active">All Sources</button>
+              <!-- Dynamic feed buttons will be added here -->
+            </div>
+          </div>
+
+          <!-- Articles Grid -->
+          <div class="newsfeed__articles">
+            <!-- Article Template -->
+            <!-- More articles will be dynamically added here -->
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer__container">
+        <a href="#" class="footer__policy">Privacy Policy – Terms & Conditions</a>
+        <a href="" class="footer__logo logo">ZIMRAR</a>
+        <div class="footer__copyright">Copyright © 2025 ZIMRAR – All Rights Reserved</div>
+      </div>
+    </footer>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
