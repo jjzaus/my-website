@@ -121,7 +121,7 @@ class NewsFeed {
 
       console.log(`Received feed data for ${url}:`, data);
 
-      // Get site domain for favicon
+      // Get site domain for favicon fallback
       const urlObject = new URL(url);
       const domain = urlObject.hostname;
       const fallbackImage = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
@@ -129,15 +129,44 @@ class NewsFeed {
       // Update feed data
       this.feeds.set(url, {
         title: data.feed.title,
-        articles: data.items.map(item => ({
-          title: item.title,
-          link: item.link,
-          pubDate: new Date(item.pubDate),
-          author: item.author || 'Unknown',
-          thumbnail: item.thumbnail || data.feed.image || fallbackImage,
-          content: item.content,
-          source: data.feed.title
-        }))
+        articles: data.items.map(item => {
+          // Log thumbnail data for debugging
+          console.log('Article image data:', {
+            title: item.title,
+            thumbnail: item.thumbnail,
+            enclosure: item.enclosure,
+            image: item.image,
+            feedImage: data.feed.image
+          });
+
+          // Try to extract image from content if no thumbnail exists
+          let thumbnail = item.thumbnail;
+          if (!thumbnail) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = item.content;
+            const firstImage = tempDiv.querySelector('img');
+            if (firstImage) {
+              thumbnail = firstImage.src;
+            }
+          }
+
+          // Fallback chain for thumbnail
+          thumbnail = thumbnail || 
+                     (item.enclosure?.type?.startsWith('image/') ? item.enclosure.link : null) ||
+                     item.image ||
+                     data.feed.image ||
+                     fallbackImage;
+
+          return {
+            title: item.title,
+            link: item.link,
+            pubDate: new Date(item.pubDate),
+            author: item.author || 'Unknown',
+            thumbnail: thumbnail,
+            content: item.content,
+            source: data.feed.title
+          };
+        })
       });
 
       console.log(`Successfully updated feed: ${data.feed.title}`);
